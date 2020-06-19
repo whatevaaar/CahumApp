@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         if (loginManager.usuarioLogeado()) {
             val usuario = FirebaseAuth.getInstance().currentUser
             dbManager.registrarUsuarioSiNoExiste(usuario!!)
-            startActivity(Intent(this,Menu::class.java))
+            val intent = Intent(this,Menu::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 
