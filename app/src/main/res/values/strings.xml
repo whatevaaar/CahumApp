@@ -10,7 +10,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -18,4 +17,6 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="descripcionLogo">Logo Cahum</string>
+    <string name="titulo_sign_out">Sign Out</string>
+    <string name="titulo_perfil_menu">Perfil</string>
 </resources>
