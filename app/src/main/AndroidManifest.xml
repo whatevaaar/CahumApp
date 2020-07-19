@@ -9,16 +9,35 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity">
+        <activity android:name=".IniciarSesionActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".InicioActivity"/>
         </activity>
-        <activity android:name=".LoginActivity">
+        <activity android:name=".InicioActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".control.LoginManager"/>
+        <activity android:name=".PerfilActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MenuActivity"/>
+        </activity>
+        <activity android:name=".ChatLogActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".MenuActivity"/>
+        </activity>
+        <activity android:name=".MenuActivity">
+        </activity>
+        <activity android:name=".RegistrarActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".InicioActivity"/>
+        </activity>
     </application>
 
 </manifest>

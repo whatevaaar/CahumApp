@@ -19,4 +19,11 @@
     <string name="descripcionLogo">Logo Cahum</string>
     <string name="titulo_sign_out">Sign Out</string>
     <string name="titulo_perfil_menu">Perfil</string>
+    <string name="texto_nombre">Nombre</string>
+    <string name="texto_correo">Correo</string>
+    <string name="texto_password">Contraseña</string>
+    <string name="boton_registrar">Registrar</string>
+    <string name="texto_chatlog">Mandar mensaje</string>
+    <string name="texto_enviar">Enviar</string>
+    <string name="iniciar_sesion">Iniciar Sesión</string>
 </resources>
