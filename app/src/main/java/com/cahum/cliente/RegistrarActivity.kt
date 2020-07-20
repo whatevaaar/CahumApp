@@ -46,7 +46,6 @@ class RegistrarActivity : AppCompatActivity() {
         botonRegistrar.setOnClickListener{
             registrarConCorreo()
         }
-        supportActionBar?.hide();
     }
 
     private fun registrarConCorreo() {
