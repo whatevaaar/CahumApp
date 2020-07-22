@@ -1,7 +1,10 @@
 package com.cahum.cliente
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.cahum.cliente.modelo.*
 import com.google.firebase.auth.FirebaseAuth
@@ -114,4 +117,20 @@ class ChatLogActivity : AppCompatActivity() {
                 }
         }
 
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.chatlog_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_perfil_usuario -> {
+                val intent = Intent(this, PerfilMentor::class.java)
+                intent.putExtra("USER_KEY", usuarioDestino)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     }

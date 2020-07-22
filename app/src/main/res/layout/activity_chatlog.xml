@@ -19,13 +19,8 @@
             android:autofillHints="@string/texto_chatlog" android:hint="@string/texto_chatlog"
             android:paddingStart="10dp"
             android:layout_marginBottom="8dp" android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/boton_enviar" android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toStartOf="@id/boton_enviar" android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp" android:padding="10dp"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="50dp" android:id="@+id/boton_enviar"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/texto_mensaje" android:text="@string/texto_enviar"/>
     <androidx.recyclerview.widget.RecyclerView
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="0dp"
@@ -35,4 +30,13 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/texto_mensaje" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="10dp"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true" app:srcCompat="@drawable/ic_menu_send" android:id="@+id/boton_enviar"
+            app:layout_constraintBottom_toBottomOf="@+id/texto_mensaje"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/texto_mensaje"
+            app:backgroundTint="#02ee90" android:focusable="true"
+            android:layout_marginBottom="16dp" android:layout_marginTop="16dp" android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
