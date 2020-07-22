@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cahum.cliente.modelo.*
 import com.google.firebase.auth.FirebaseAuth
@@ -126,11 +127,17 @@ class ChatLogActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_perfil_usuario -> {
-                val intent = Intent(this, PerfilMentor::class.java)
-                intent.putExtra("USER_KEY", usuarioDestino)
-                startActivity(intent)
+                if (usuarioDestino == null) Toast.makeText(this,"Todavía no tienes mentor!",Toast.LENGTH_LONG).show()
+                else llamarActividad()
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun llamarActividad(){
+
+        val intent = Intent(this, PerfilMentor::class.java)
+        intent.putExtra("USER_KEY", usuarioDestino)
+        startActivity(intent)
     }
+}

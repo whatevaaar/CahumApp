@@ -31,7 +31,7 @@ class PerfilActivity : AppCompatActivity() {
             }
 
         }
-        ref.addListenerForSingleValueEvent(postListener)
+        ref.addValueEventListener(postListener)
     }
     private fun actualizarPantalla() {
         texto_nombre_perfil_cliente.text = usuario!!.displayName

@@ -43,7 +43,7 @@
             android:maxHeight="200dp" android:maxWidth="200dp"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.222"
-            app:layout_constraintBottom_toTopOf="@+id/imageView6"/>
+            app:layout_constraintBottom_toTopOf="@+id/imageView6" android:contentDescription="TODO"/>
     <ImageView
             android:layout_width="wrap_content"
             android:adjustViewBounds="true"
@@ -72,8 +72,39 @@
             app:backgroundTint="@color/colorPrimary" android:focusable="true"/>
     <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imageButton"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje1"
             android:background="#00FFFFFF"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="64dp"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje0"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.15"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje3"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/imageView6" app:layout_constraintEnd_toEndOf="@+id/imageView6"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6" android:layout_marginBottom="64dp"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje4"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/imageView5" app:layout_constraintEnd_toEndOf="@+id/imageView5"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView5" android:layout_marginBottom="64dp"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje2"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/imageView4" app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4" app:layout_constraintHorizontal_bias="0.393"
+            android:layout_marginBottom="64dp"/>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje5"
+            android:background="#00FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/imageView3" app:layout_constraintEnd_toEndOf="@+id/imageView3"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3" android:layout_marginBottom="64dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
