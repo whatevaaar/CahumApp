@@ -48,7 +48,7 @@ class ChatLogActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(postListener)
     }
 
-    private fun regresarMentor(uidMentor: String) {        val usuario = FirebaseAuth.getInstance().uid
+    private fun regresarMentor(uidMentor: String) {
         val ref = FirebaseDatabase.getInstance().getReference("/mentores/${uidMentor}")
         val postListener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {

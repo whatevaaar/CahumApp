@@ -13,4 +13,5 @@ class Cliente(
     var psicometria: Boolean = false,
     var estrategia: Boolean = false,
     val uidMentor: String = ""
-): Parcelable
+)
+    : Parcelable
