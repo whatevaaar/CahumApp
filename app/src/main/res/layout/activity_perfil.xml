@@ -39,10 +39,10 @@
             android:text="@string/checkbox_cv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/checkBoxCv"
-            app:layout_constraintStart_toStartOf="@+id/texto_nombre_perfil_cliente"
+            app:layout_constraintStart_toStartOf="parent"
             android:buttonTint="@color/colorPrimary"
             app:layout_constraintTop_toBottomOf="@+id/texto_correo_perfil_cliente" android:layout_marginTop="64dp"
-            android:enabled="false"/>
+            android:enabled="false" app:layout_constraintEnd_toEndOf="parent"/>
     <CheckBox
             android:text="@string/checkbox_linkedin"
             android:layout_width="wrap_content"
