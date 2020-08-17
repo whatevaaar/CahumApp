@@ -12,6 +12,7 @@ class Cliente(
     var simulador: Boolean = false,
     var psicometria: Boolean = false,
     var estrategia: Boolean = false,
-    val uidMentor: String = ""
-)
-    : Parcelable
+    val uidMentor: String = "",
+    var tokenNotificacion: String = ""
+) : Parcelable
+

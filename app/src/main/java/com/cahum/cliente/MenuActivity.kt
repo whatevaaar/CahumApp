@@ -1,11 +1,12 @@
 package com.cahum.cliente
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.view.isVisible
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.cahum.cliente.modelo.Cliente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -15,25 +16,56 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_menu.*
 
 class MenuActivity : AppCompatActivity() {
+    private var privateMode = 0
+    private val prefName = "tema"
     private val tag = "MenuActivity"
+    private val temaBase = "mountain"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
         establecerPantallaCompleta()
         encontrarCliente()
+        cargarAjustes()
         floatingBotonEnviar.setOnClickListener {
-            startActivity(Intent(this,ChatLogActivity::class.java))
+            startActivity(Intent(this, ChatLogActivity::class.java))
         }
         floatingBotonPerfil.setOnClickListener {
-            startActivity(Intent(this,PerfilActivity::class.java))
+            startActivity(Intent(this, PerfilActivity::class.java))
         }
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        cargarAjustes()
+    }
+
+    private fun cargarAjustes() {
+        val sharedPref: SharedPreferences = getSharedPreferences(prefName, privateMode)
+        val tema = sharedPref.getString(prefName, temaBase)
+        val id: Int = encontrarIdImg("bg_${tema}")
+        coordinatorLayout.setBackgroundResource(id)
+        cambiarImgDeEscalones(tema)
+    }
+
+    private fun cambiarImgDeEscalones(tema: String?) {
+        for(i in 1..5){
+            val id: Int =resources.getIdentifier("escalon${i}", "id", packageName)
+            val escalon = findViewById<ImageView>(id)
+            escalon.setImageResource(encontrarIdImg("platform_${tema}"))
+        }
+    }
+
+    private fun encontrarIdImg(nombreImg: String): Int = resources.getIdentifier(nombreImg, "drawable", packageName)
 
     private fun encontrarCliente() {
         val usuario = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/clientes/${usuario}")
         val postListener = object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) { Log.d(tag, "ERROR") }
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d(tag, "ERROR")
+            }
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     desaparecerImagenesDePersonaje()
@@ -44,9 +76,9 @@ class MenuActivity : AppCompatActivity() {
         }
         ref.addValueEventListener(postListener)
     }
+
     private fun establecerPersonaje(cliente: Cliente) {
-        val progreso: Int = calcularProgreso(cliente)
-        when(progreso){
+        when (calcularProgreso(cliente)) {
             0 -> imgPersonaje0.visibility = View.VISIBLE
             1 -> imgPersonaje1.visibility = View.VISIBLE
             2 -> imgPersonaje2.visibility = View.VISIBLE
@@ -77,8 +109,7 @@ class MenuActivity : AppCompatActivity() {
         return total
     }
 
-
-    fun establecerPantallaCompleta() {
+    private fun establecerPantallaCompleta() {
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_IMMERSIVE or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
         supportActionBar?.hide()

@@ -7,5 +7,6 @@ import kotlinx.android.parcel.Parcelize
 class Mentor(
     val uid: String = "",
     val nombre: String = "",
-    var calificacion: Double = 0.0
+    var calificacion: Double = 0.0,
+    var tokenNotificacion: String = ""
 ) : Parcelable

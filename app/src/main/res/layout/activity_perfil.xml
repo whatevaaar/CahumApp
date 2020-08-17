@@ -74,4 +74,27 @@
             android:buttonTint="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="@+id/checkBoxCv" android:layout_marginTop="16dp"
             android:enabled="false"/>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp" app:srcCompat="@drawable/flecha_izquierda" android:id="@+id/imgFlechaIzq"
+            app:layout_constraintEnd_toStartOf="@+id/imagePlatform"
+            app:layout_constraintBottom_toBottomOf="@+id/imagePlatform"
+            app:layout_constraintTop_toTopOf="@+id/imagePlatform" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="32dp" android:layout_marginBottom="32dp" android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"/>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp" app:srcCompat="@drawable/flecha_derecha" android:id="@+id/imgFlechaDer"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/imagePlatform"
+            app:layout_constraintStart_toEndOf="@+id/imagePlatform"
+            app:layout_constraintBottom_toBottomOf="@+id/imagePlatform" android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp" android:layout_marginRight="16dp" android:layout_marginEnd="16dp"
+    />
+    <ImageView
+            android:layout_width="260dp"
+            android:layout_height="113dp" app:srcCompat="@drawable/platform_mountain"
+            android:id="@+id/imagePlatform"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxEstrategia"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

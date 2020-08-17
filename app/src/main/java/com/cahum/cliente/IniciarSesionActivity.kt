@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.cahum.cliente.control.DBManager
+import com.cahum.cliente.control.MyFirebaseMessagingService
+import com.cahum.cliente.modelo.Cliente
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -14,7 +15,12 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_iniciar_sesion.*
 import kotlinx.android.synthetic.main.activity_main.sign_in_button
 
@@ -23,7 +29,6 @@ class IniciarSesionActivity : AppCompatActivity() {
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var botonSignIn: SignInButton
-    private val dbManager = DBManager()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.title = "Iniciar Sesión"
@@ -87,13 +92,25 @@ class IniciarSesionActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Authentication Completed.", Toast.LENGTH_LONG).show()
-                    dbManager.registrarUsuarioSiNoExiste(FirebaseAuth.getInstance().currentUser!!)
+                    registrarUsuarioSiNoExiste(FirebaseAuth.getInstance().currentUser!!)
                     redirigirAMenu()
                 } else Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_LONG).show()
             }
     }
 
+    fun registrarUsuarioSiNoExiste(usuario: FirebaseUser) {
+
+        val ref = FirebaseDatabase.getInstance().getReference("/clientes/${usuario.uid}")
+        val postListener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (!dataSnapshot.exists()) ref.setValue(Cliente(usuario.uid,usuario.displayName!!))
+            }
+        }
+        ref.addListenerForSingleValueEvent(postListener)
+    }
     private fun redirigirAMenu() {
+        MyFirebaseMessagingService().conseguirToken()
         val intent = Intent(this, MenuActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
