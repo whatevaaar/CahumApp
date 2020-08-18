@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:clickable="true" app:srcCompat="@drawable/ic_menu_send" android:id="@+id/floatingBotonEnviar"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-            app:backgroundTint="@android:color/holo_orange_dark" android:layout_marginRight="24dp"
+            app:backgroundTint="@color/colorAccent" android:layout_marginRight="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp" android:focusable="true"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -69,7 +69,7 @@
             android:id="@+id/floatingBotonPerfil" app:layout_constraintBottom_toTopOf="@+id/floatingBotonEnviar"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="24dp"
             android:layout_marginEnd="24dp" android:layout_marginBottom="24dp"
-            app:backgroundTint="@color/colorPrimary" android:focusable="true"/>
+            app:backgroundTint="#F7B814" android:focusable="true"/>
     <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@drawable/player" android:id="@+id/imgPersonaje1"

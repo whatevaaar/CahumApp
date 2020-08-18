@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".RegistrarActivity" android:id="@+id/linearLayout"
->
+        android:background="@color/colorPrimaryDark">
 
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/texto_nombre"

@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ChatLogActivity" android:background="@android:color/holo_blue_light">
+        tools:context=".ChatLogActivity" android:background="@color/colorPrimaryDark">
 
     <EditText
             android:layout_width="0dp"
@@ -25,7 +25,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@android:color/holo_blue_light"
+            android:background="@color/colorPrimaryDark"
             android:id="@+id/recyclerview_chat"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/texto_mensaje" app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
             android:clickable="true" app:srcCompat="@drawable/ic_menu_send" android:id="@+id/boton_enviar"
             app:layout_constraintBottom_toBottomOf="@+id/texto_mensaje"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="@+id/texto_mensaje"
-            app:backgroundTint="#02ee90" android:focusable="true"
+            app:backgroundTint="@color/colorAccent" android:focusable="true"
             android:layout_marginBottom="16dp" android:layout_marginTop="16dp" android:layout_marginRight="8dp"
             android:layout_marginEnd="8dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

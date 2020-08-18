@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".PerfilMentor">
+        tools:context=".PerfilMentor" android:background="@color/colorPrimaryDark">
 
     <RatingBar
             android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             app:civ_border_width="3dp"
             android:src="@drawable/ic_launcher_foreground"
-            app:civ_border_color="#FF000000" app:layout_constraintStart_toStartOf="parent"
+            app:civ_border_color="@color/colorPrimary" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="VectorDrawableCompat"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="32dp"
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/texto_nombre_perfil_mentor"
             tools:text="Mentor Mentorin Mentorcillo"
-            android:textColor="#000000" android:textSize="18sp"
+            android:textColor="@color/colorAccent" android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/profile_image2"
             android:layout_marginTop="64dp"/>
