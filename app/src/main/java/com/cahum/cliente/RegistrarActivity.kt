@@ -3,7 +3,6 @@ package com.cahum.cliente
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cahum.cliente.control.MyFirebaseMessagingService
@@ -12,7 +11,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -28,8 +26,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 const val RC_SIGN_IN = 200
 
 class RegistrarActivity : AppCompatActivity() {
-    private lateinit var botonSignIn: SignInButton
-    private lateinit var botonRegistrar: Button
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var gso: GoogleSignInOptions
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -46,28 +42,26 @@ class RegistrarActivity : AppCompatActivity() {
         sign_in_button.setOnClickListener {
             if (checkBoxTerminos.isChecked)
                 signIn()
-            else Toast.makeText(
-                this,
-                "Primero tienes que estar de acuerdo con los términos y condiciones.",
-                Toast.LENGTH_LONG
-            ).show()
+            else crearAlertaTerminos()
         }
         boton_registrar.setOnClickListener {
             if (checkBoxTerminos.isChecked)
                 registrarConCorreo()
-            else Toast.makeText(
-                this,
-                "Primero tienes que estar de acuerdo con los términos y condiciones.",
-                Toast.LENGTH_LONG
-            ).show()
+            else crearAlertaTerminos()
         }
     }
 
-    private fun registrarUsuarioSiNoExiste(usuario: FirebaseUser) {
+    private fun crearAlertaTerminos() =
+        Toast.makeText(this, "Tienes que estar de acuerdo con los términos y condiciones.", Toast.LENGTH_LONG).show()
 
+    private fun crearAlertaError() = Toast.makeText(this, "Error, inténtalo otra vez", Toast.LENGTH_LONG).show()
+    private fun crearAlertaAutentificado() = Toast.makeText(this, "Autenticado con éxito!", Toast.LENGTH_LONG).show()
+    private fun crearAlertaNoAutentificado() = Toast.makeText(this, "Error al autenticarse", Toast.LENGTH_LONG).show()
+
+    private fun registrarUsuarioSiNoExiste(usuario: FirebaseUser) {
         val ref = FirebaseDatabase.getInstance().getReference("/clientes/${usuario.uid}")
         val postListener = object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {}
+            override fun onCancelled(p0: DatabaseError) { crearAlertaError()}
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (!dataSnapshot.exists()) ref.setValue(Cliente(usuario.uid, usuario.displayName!!))
@@ -81,13 +75,13 @@ class RegistrarActivity : AppCompatActivity() {
         val correo = texto_correo.editText?.text.toString()
         val pass = texto_password.editText?.text.toString()
         if (nombre.isEmpty() or correo.isEmpty() or pass.isEmpty()) {
-            Toast.makeText(this, "Error al autenticarse", Toast.LENGTH_LONG).show()
+            crearAlertaNoAutentificado()
             return
         }
         firebaseAuth.createUserWithEmailAndPassword(correo, pass)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Toast.makeText(this, "Authentication Completed.", Toast.LENGTH_LONG).show()
+                    crearAlertaAutentificado()
                     registrarEnFirebase(nombre)
                     redirigirAMenu()
                 }
@@ -102,14 +96,12 @@ class RegistrarActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     registrarUsuarioSiNoExiste(usuario)
-                    Log.d("LOGIN", "User password updated.")
                 }
             }
     }
 
     private fun signIn() {
-        if (usuarioLogeado())
-            return
+        if (usuarioLogeado()) return
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
@@ -117,9 +109,8 @@ class RegistrarActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (usuarioLogeado()) {
+        if (usuarioLogeado())
             redirigirAMenu()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -134,9 +125,7 @@ class RegistrarActivity : AppCompatActivity() {
         try {
             val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account!!)
-        } catch (e: ApiException) {
-            Toast.makeText(this, "Error al autenticarse", Toast.LENGTH_LONG).show()
-        }
+        } catch (e: ApiException) { crearAlertaError()}
     }
 
     private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
@@ -145,10 +134,10 @@ class RegistrarActivity : AppCompatActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Authentication Completed.", Toast.LENGTH_LONG).show()
+                    crearAlertaAutentificado()
                     registrarUsuarioSiNoExiste(FirebaseAuth.getInstance().currentUser!!)
                     redirigirAMenu()
-                } else Toast.makeText(this, "Authentication Failed.", Toast.LENGTH_LONG).show()
+                } else crearAlertaError()
             }
     }
 
@@ -158,7 +147,5 @@ class RegistrarActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
-
     fun usuarioLogeado(): Boolean = FirebaseAuth.getInstance().currentUser != null
-
 }
