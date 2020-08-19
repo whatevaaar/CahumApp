@@ -38,14 +38,12 @@ class RegistrarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.title = "Registro"
-        botonSignIn = sign_in_button
-        botonRegistrar = boton_registrar
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-        botonSignIn.setOnClickListener {
+        sign_in_button.setOnClickListener {
             if (checkBoxTerminos.isChecked)
                 signIn()
             else Toast.makeText(
@@ -54,7 +52,7 @@ class RegistrarActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
-        botonRegistrar.setOnClickListener {
+        boton_registrar.setOnClickListener {
             if (checkBoxTerminos.isChecked)
                 registrarConCorreo()
             else Toast.makeText(
