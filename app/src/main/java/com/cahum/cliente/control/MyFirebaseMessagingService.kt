@@ -29,7 +29,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         val usuario = FirebaseAuth.getInstance().currentUser?:return
-        val ref = FirebaseDatabase.getInstance().getReference("/mentores/${usuario.uid}")
+        val ref = FirebaseDatabase.getInstance().getReference("/clientes/${usuario.uid}")
         val postListener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
